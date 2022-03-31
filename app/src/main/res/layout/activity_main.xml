@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textPlaySongName"
+            android:text="No music specified"
+            android:textSize="25sp"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:background="@color/cardview_dark_background"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_play"/>
+
+            <TextView
+                android:id="@+id/textSongPlayed"
+                android:text="0:00"
+                android:textColor="#000"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/btnPlay"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textSongEnd"
+                android:text="0:00"
+                android:textColor="#000"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_toRightOf="@id/textSongPlayed"
+                android:layout_toLeftOf="@id/textSongEnd"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+    <ListView
+        android:id="@+id/listSong"
+        android:layout_width="match_parent"
+        android:divider="@color/design_default_color_primary"
+        android:dividerHeight="0sp"
+        android:padding="4dp"
+        android:layout_height="0dp"
+        android:layout_weight="6">
+        
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/btnScan"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_btsearch"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="70dp"
+                android:layout_marginVertical="5dp"/>
+
+            <TextView
+                android:id="@+id/textStat"
+                android:text="Scanner Off"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_toRightOf="@id/btnScan"
+                android:layout_marginLeft="10dp"
+                android:padding="8dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textConnId"
+                android:text="Last Connected Time"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textConnTime"
+                android:text="00:00:00"
+                android:padding="8dp"
+                android:background="@drawable/bg_item"
+                android:layout_toRightOf="@+id/textConnId"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textSwitchId"
+                android:text="Beacon Played"
+                android:layout_toRightOf="@id/textConnTime"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/textSwitch"
+                android:text="x"
+                android:padding="8dp"
+                android:background="@drawable/bg_item"
+                android:layout_toRightOf="@id/textSwitchId"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+        
+</androidx.constraintlayout.widget.ConstraintLayout>
