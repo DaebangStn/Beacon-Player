@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bg_list.xml" value="0.349" />
+        <entry key="app/src/main/res/drawable/ic_setting.xml" value="0.2305" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2875905797101449" />
+        <entry key="app/src/main/res/layout/dialog_setting.xml" value="0.22395833333333334" />
         <entry key="app/src/main/res/layout/list_song.xml" value="0.40443840579710144" />
       </map>
     </option>

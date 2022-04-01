@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -107,7 +108,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/ic_btsearch"
                 android:layout_centerVertical="true"
-                android:layout_marginHorizontal="70dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"/>
 
             <TextView
@@ -115,13 +116,22 @@
                 android:text="Scanner Off"
                 android:textSize="20sp"
                 android:textColor="#000"
-                android:layout_toRightOf="@id/btnScan"
                 android:layout_marginLeft="10dp"
+                android:layout_centerHorizontal="true"
                 android:padding="8dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/bg_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnSetting"
+                android:background="@drawable/ic_setting"
+                android:layout_toRightOf="@id/textStat"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
 
         </RelativeLayout>
 

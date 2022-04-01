@@ -6,7 +6,6 @@ import android.bluetooth.le.ScanCallback
 import android.bluetooth.le.ScanResult
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.PorterDuff
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +19,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.DialogFragment
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -30,7 +30,7 @@ import java.lang.StringBuilder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SettingDialogFragment.NoticeDialogListener{
     private lateinit var listView : ListView
     private val listMusic = mutableListOf<String>()
     private val listId = mutableListOf<Long>()
@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
     private var BT_SCAN_ENABLED: Boolean = false
     var advPrevData: Int = -1
 
-    private val MUSIC_TITLE_SUFFIX = ""
-    private val MUSIC_TITLE_PREFIX = ""
+    var MUSIC_TITLE_POSTFIX = ""
+    var MUSIC_TITLE_PREFIX = ""
 
     private lateinit var bluetoothAdapter: BluetoothAdapter
     private lateinit var bluetoothLauncher: ActivityResultLauncher<Intent>
@@ -115,6 +115,21 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer?.release()
 
         runtimePermission()
+
+        val btnSetting: Button = findViewById(R.id.btnSetting)
+        btnSetting.setOnClickListener{
+            val args: Bundle = Bundle()
+            args.putString("MUSIC_TITLE_POSTFIX", MUSIC_TITLE_POSTFIX)
+            args.putString("MUSIC_TITLE_PREFIX", MUSIC_TITLE_PREFIX)
+
+            val dialog = SettingDialogFragment()
+            dialog.arguments = args
+            dialog.show(supportFragmentManager, "setting")
+
+            val argsReturned: Bundle = dialog.requireArguments()
+            MUSIC_TITLE_POSTFIX = argsReturned.getString("MUSIC_TITLE_POSTFIX", MUSIC_TITLE_POSTFIX)
+            MUSIC_TITLE_PREFIX = argsReturned.getString("MUSIC_TITLE_PREFIX", MUSIC_TITLE_PREFIX)
+        }
     }
 
     private fun runtimePermission() {
@@ -149,7 +164,7 @@ class MainActivity : AppCompatActivity() {
             MediaStore.Audio.Media.TITLE
         )
 
-        val selection = "${MediaStore.Audio.Media.TITLE} LIKE '${MUSIC_TITLE_PREFIX}%${MUSIC_TITLE_SUFFIX}'"
+        val selection = "${MediaStore.Audio.Media.TITLE} LIKE '${MUSIC_TITLE_PREFIX}%${MUSIC_TITLE_POSTFIX}'"
         val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
 
         val cursor = contentResolver.query(
@@ -313,6 +328,25 @@ class MainActivity : AppCompatActivity() {
                 scanBtn.setBackgroundResource(R.drawable.ic_btsearch)
             }
         }
+    }
+
+    override fun onDialogNeutralClick(dialog: DialogFragment) {
+        MUSIC_TITLE_PREFIX = ""
+        MUSIC_TITLE_POSTFIX = ""
+
+        listMusic.clear()
+        displaySong()
+    }
+
+    override fun onDialogPositiveClick(prefix: String, postfix: String) {
+        MUSIC_TITLE_PREFIX = prefix
+        MUSIC_TITLE_POSTFIX = postfix
+
+        Log.w("DIALOG", "entered prefix $prefix")
+        Log.w("DIALOG", "entered postfix $postfix")
+
+        listMusic.clear()
+        displaySong()
     }
 
     fun createTime(duration: Int): String{
