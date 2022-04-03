@@ -330,6 +330,7 @@ class MainActivity : AppCompatActivity(), SettingDialogFragment.NoticeDialogList
         }
     }
 
+
     override fun onDialogNeutralClick(dialog: DialogFragment) {
         MUSIC_TITLE_PREFIX = ""
         MUSIC_TITLE_POSTFIX = ""
