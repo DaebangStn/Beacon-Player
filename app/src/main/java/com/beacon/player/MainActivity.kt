@@ -161,11 +161,11 @@ class MainActivity : AppCompatActivity(), SettingDialogFragment.NoticeDialogList
     fun displaySong(){
         val proj = arrayOf(
             MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.TITLE
+            MediaStore.Audio.Media.DISPLAY_NAME
         )
 
-        val selection = "${MediaStore.Audio.Media.TITLE} LIKE '${MUSIC_TITLE_PREFIX}%${MUSIC_TITLE_POSTFIX}'"
-        val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
+        val selection = "${MediaStore.Audio.Media.DISPLAY_NAME} LIKE '${MUSIC_TITLE_PREFIX}%${MUSIC_TITLE_POSTFIX}.mp3'"
+        val sortOrder = "${MediaStore.Audio.Media.DISPLAY_NAME} ASC"
 
         val cursor = contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity(), SettingDialogFragment.NoticeDialogList
 
         cursor?.use {
             val idCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
-            val titleCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
+            val titleCol = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME)
 
             while (cursor.moveToNext()){
                 val id = cursor.getLong(idCol)
@@ -334,6 +334,7 @@ class MainActivity : AppCompatActivity(), SettingDialogFragment.NoticeDialogList
         MUSIC_TITLE_PREFIX = ""
         MUSIC_TITLE_POSTFIX = ""
 
+        listId.clear()
         listMusic.clear()
         displaySong()
     }
@@ -345,6 +346,7 @@ class MainActivity : AppCompatActivity(), SettingDialogFragment.NoticeDialogList
         Log.w("DIALOG", "entered prefix $prefix")
         Log.w("DIALOG", "entered postfix $postfix")
 
+        listId.clear()
         listMusic.clear()
         displaySong()
     }
